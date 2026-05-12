@@ -17,7 +17,8 @@ st.set_page_config(
     page_title="CX Intelligence Platform",
     page_icon="◈",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
+    menu_items={}
 )
 
 # ── Custom CSS ────────────────────────────────────────────────────────────────
@@ -49,12 +50,25 @@ html, body, [class*="css"] {
 
 .stApp { background-color: var(--bg); }
 
-/* Sidebar */
-section[data-testid="stSidebar"] {
+/* Sidebar — covers both old and new Streamlit data-testid values */
+section[data-testid="stSidebar"],
+[data-testid="stSidebarContent"],
+[data-testid="collapsedControl"] {
     background: var(--surface) !important;
-    border-right: 1px solid var(--border);
+    border-right: 1px solid var(--border) !important;
 }
+
+section[data-testid="stSidebar"] > div:first-child {
+    background: var(--surface) !important;
+}
+
 section[data-testid="stSidebar"] .stMarkdown { color: var(--text); }
+
+/* Sidebar toggle button (collapsed arrow) */
+[data-testid="collapsedControl"] {
+    background: var(--surface) !important;
+    color: var(--text) !important;
+}
 
 /* Hide default Streamlit elements */
 #MainMenu, footer, header { visibility: hidden; }
@@ -370,6 +384,9 @@ CHANNEL_COLORS = {
 # SIDEBAR
 # ─────────────────────────────────────────────────────────────────────────────
 with st.sidebar:
+    # Native Streamlit element first — required to properly initialize the sidebar
+    st.write("")
+
     st.markdown("""
     <div style="padding: 0.5rem 0 1rem;">
         <div style="font-family:'DM Serif Display',serif; font-size:1.3rem; color:#e8e8f0;">◈ CX Intelligence</div>
