@@ -1,6 +1,5 @@
-streamlit
-anthropic
+streamlit==1.45.0
 pandas
 plotly
-numpy
+anthropic
 python-dotenv

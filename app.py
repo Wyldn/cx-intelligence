@@ -64,7 +64,6 @@ section[data-testid="stSidebar"] > div:first-child {
 
 section[data-testid="stSidebar"] .stMarkdown { color: var(--text); }
 
-/* Sidebar toggle button (collapsed arrow) */
 [data-testid="collapsedControl"] {
     background: var(--surface) !important;
     color: var(--text) !important;
@@ -87,20 +86,16 @@ section[data-testid="stSidebar"] .stMarkdown { color: var(--text); }
 .hero-header::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -10%;
-    width: 40%;
-    height: 200%;
+    top: -50%; left: -10%;
+    width: 40%; height: 200%;
     background: radial-gradient(ellipse, rgba(108,99,255,0.12) 0%, transparent 70%);
     pointer-events: none;
 }
 .hero-header::after {
     content: '';
     position: absolute;
-    top: -50%;
-    right: -5%;
-    width: 30%;
-    height: 200%;
+    top: -50%; right: -5%;
+    width: 30%; height: 200%;
     background: radial-gradient(ellipse, rgba(255,101,132,0.08) 0%, transparent 70%);
     pointer-events: none;
 }
@@ -188,11 +183,7 @@ section[data-testid="stSidebar"] .stMarkdown { color: var(--text); }
     margin: 0;
     font-weight: 400;
 }
-.section-line {
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-}
+.section-line { flex: 1; height: 1px; background: var(--border); }
 .section-tag {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.7rem;
@@ -285,19 +276,16 @@ section[data-testid="stSidebar"] .stMarkdown { color: var(--text); }
 }
 .campaign-body { font-size: 0.87rem; color: var(--text-muted); line-height: 1.7; }
 
-/* Sentiment Badge */
 .sentiment-pos { color: var(--positive); font-weight: 600; }
 .sentiment-neg { color: var(--negative); font-weight: 600; }
 .sentiment-neu { color: var(--neutral); font-weight: 600; }
 
-/* Styledivider */
 .styled-divider {
     border: none;
     border-top: 1px solid var(--border);
     margin: 1.5rem 0;
 }
 
-/* Sidebar Styles */
 .sidebar-section {
     font-size: 0.72rem;
     text-transform: uppercase;
@@ -309,13 +297,9 @@ section[data-testid="stSidebar"] .stMarkdown { color: var(--text); }
     border-bottom: 1px solid var(--border);
 }
 
-/* Plotly dark override */
 .js-plotly-plot .plotly { background: transparent !important; }
-
-/* Spinner */
 .stSpinner > div { border-top-color: var(--accent) !important; }
 
-/* Buttons */
 .stButton > button {
     background: linear-gradient(135deg, var(--accent), #8b83ff);
     color: white;
@@ -328,14 +312,12 @@ section[data-testid="stSidebar"] .stMarkdown { color: var(--text); }
 }
 .stButton > button:hover { opacity: 0.85; }
 
-/* Selectbox, Multiselect */
 .stSelectbox > div > div, .stMultiSelect > div > div {
     background: var(--surface) !important;
     border-color: var(--border) !important;
     color: var(--text) !important;
 }
 
-/* Tabs */
 .stTabs [data-baseweb="tab-list"] {
     background: transparent;
     border-bottom: 1px solid var(--border);
@@ -355,7 +337,6 @@ section[data-testid="stSidebar"] .stMarkdown { color: var(--text); }
     border-bottom: 2px solid var(--accent) !important;
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
@@ -384,8 +365,7 @@ CHANNEL_COLORS = {
 # SIDEBAR
 # ─────────────────────────────────────────────────────────────────────────────
 with st.sidebar:
-    # Native Streamlit element first — required to properly initialize the sidebar
-    st.write("")
+    st.write("")  # native element first — required to initialize the sidebar panel
 
     st.markdown("""
     <div style="padding: 0.5rem 0 1rem;">
@@ -499,7 +479,6 @@ with tab1:
     col_left, col_right = st.columns([1.8, 1])
 
     with col_left:
-        # Sentiment over time by channel
         df_time = df_interactions.copy()
         df_time['date'] = pd.to_datetime(df_time['date'])
         df_time_agg = df_time.groupby(['date','channel'])['sentiment_score'].mean().reset_index()
@@ -518,7 +497,6 @@ with tab1:
         st.plotly_chart(fig, use_container_width=True)
 
     with col_right:
-        # Donut: sentiment distribution
         sent_counts = df_interactions['sentiment'].value_counts()
         fig2 = go.Figure(go.Pie(
             labels=sent_counts.index,
@@ -535,7 +513,6 @@ with tab1:
         )
         st.plotly_chart(fig2, use_container_width=True)
 
-    # Sentiment by channel breakdown
     st.markdown('<div class="section-header"><div class="section-title">Channel Breakdown</div><div class="section-line"></div></div>', unsafe_allow_html=True)
 
     cols = st.columns(len(channels))
@@ -564,7 +541,6 @@ with tab1:
             </div>
             """, unsafe_allow_html=True)
 
-    # Heatmap: sentiment by day of week and hour
     st.markdown('<div class="section-header"><div class="section-title">Sentiment Heatmap</div><div class="section-line"></div><div class="section-tag">HOUR × DAY</div></div>', unsafe_allow_html=True)
 
     df_interactions['hour'] = pd.to_datetime(df_interactions['date']).dt.hour
@@ -609,7 +585,6 @@ with tab2:
         st.plotly_chart(fig_funnel, use_container_width=True)
 
     with col_s:
-        # Sankey: channel → stage → outcome
         fig_sankey = go.Figure(go.Sankey(
             arrangement="snap",
             node=dict(
@@ -629,7 +604,6 @@ with tab2:
         fig_sankey.update_layout(title="Channel → Resolution → Outcome Flow", **PLOTLY_THEME)
         st.plotly_chart(fig_sankey, use_container_width=True)
 
-    # Journey stage metrics
     st.markdown('<div class="section-header"><div class="section-title">Stage Performance</div><div class="section-line"></div></div>', unsafe_allow_html=True)
 
     stage_data = [
@@ -653,7 +627,6 @@ with tab2:
         </div>
         """, unsafe_allow_html=True)
 
-    # Drop-off analysis
     st.markdown('<div class="section-header"><div class="section-title">Drop-off Analysis</div><div class="section-line"></div><div class="section-tag">WHERE CUSTOMERS LEAVE</div></div>', unsafe_allow_html=True)
 
     dropoff_reasons = {
@@ -689,7 +662,6 @@ with tab3:
     col_a, col_b = st.columns(2)
 
     with col_a:
-        # Sessions over time
         df_web_daily = df_web.groupby('date').agg(
             sessions=('session_id','count'),
             conversions=('converted','sum'),
@@ -710,7 +682,6 @@ with tab3:
         st.plotly_chart(fig_sess, use_container_width=True)
 
     with col_b:
-        # Traffic sources
         sources = {'Organic Search': 38, 'Paid Search': 24, 'Social Media': 18, 'Direct': 12, 'Email': 5, 'Referral': 3}
         fig_src = go.Figure(go.Pie(
             labels=list(sources.keys()),
@@ -724,7 +695,6 @@ with tab3:
         fig_src.update_layout(title="Traffic Source Breakdown", **PLOTLY_THEME, showlegend=False)
         st.plotly_chart(fig_src, use_container_width=True)
 
-    # Page performance
     st.markdown('<div class="section-header"><div class="section-title">Page Performance</div><div class="section-line"></div></div>', unsafe_allow_html=True)
 
     pages = {
@@ -751,7 +721,6 @@ with tab3:
         }
     )
 
-    # Behavior scatter
     st.markdown('<div class="section-header"><div class="section-title">Engagement vs Conversion</div><div class="section-line"></div></div>', unsafe_allow_html=True)
 
     fig_scatter = go.Figure()
@@ -791,7 +760,6 @@ with tab4:
         </div>
         """, unsafe_allow_html=True)
     elif run_analysis:
-        # Build context summary for the AI
         context = {
             "total_interactions": total_interactions,
             "avg_sentiment": round(float(avg_sentiment), 3),
@@ -852,7 +820,6 @@ with tab4:
         </div>
         """, unsafe_allow_html=True)
 
-    # Always show static example preview
     st.markdown('<div class="section-header"><div class="section-title">Example Output Preview</div><div class="section-line"></div><div class="section-tag">STATIC DEMO</div></div>', unsafe_allow_html=True)
 
     example_recs = [
