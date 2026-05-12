@@ -489,7 +489,7 @@ with tab1:
                 name=ch, mode='lines',
                 line=dict(color=CHANNEL_COLORS.get(ch, '#6c63ff'), width=2),
                 fill='tozeroy',
-                fillcolor=CHANNEL_COLORS.get(ch, '#6c63ff').replace('#','rgba(').replace('ff','ff,0.05)') if ch != 'Phone' else 'rgba(108,99,255,0.05)',
+                fillcolor={'Phone': 'rgba(108,99,255,0.05)', 'Chat': 'rgba(67,233,123,0.05)', 'Web': 'rgba(255,101,132,0.05)'}.get(ch, 'rgba(108,99,255,0.05)'),
             ))
         fig.update_layout(title="Sentiment Score Trend by Channel", **PLOTLY_THEME)
         st.plotly_chart(fig, use_container_width=True)
