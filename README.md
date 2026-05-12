@@ -1,6 +1,6 @@
 CX Intelligence Platform
 Customer Journey & Sentiment Analysis · AI-Powered Recommendations
-A production-grade Streamlit application that analyzes customer sentiment across multiple channels, tracks web analytics and journey behavior, and generates AI-powered recommendations and campaign strategies using Anthropic Claude.
+A production-grade Streamlit application that analyzes customer sentiment across multiple channels, tracks web analytics and journey behavior, and generates AI-powered recommendations and campaign strategies.
 
 Features
 
