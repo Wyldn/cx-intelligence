@@ -400,6 +400,11 @@ with st.sidebar:
         <div style="font-size:0.8rem; color:#e8e8f0;">📊 Synthetic Demo Data</div>
         <div style="font-size:0.75rem; color:#6b6b80; margin-top:0.3rem; line-height:1.5;">Connect GA4, Salesforce, or Zendesk via the integrations panel to use live data.</div>
     </div>
+    <div style="margin-top:1.5rem; padding-top:1.2rem; border-top:1px solid #1e1e2e; text-align:center;">
+        <div style="font-size:0.68rem; color:#6b6b80; font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.4rem;">Built by</div>
+        <div style="font-family:'DM Serif Display',serif; font-size:1rem; color:#e8e8f0;">Rishikanth Mannava</div>
+        <div style="font-size:0.68rem; color:#6b6b80; margin-top:0.2rem; font-family:'JetBrains Mono',monospace; letter-spacing:0.05em;">◈ CX Intelligence Platform</div>
+    </div>
     """, unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -425,6 +430,7 @@ st.markdown(f"""
     <div class="hero-badge">◈ AI-POWERED · REAL-TIME ANALYSIS</div>
     <div class="hero-title">Customer Experience Intelligence</div>
     <p class="hero-sub">Sentiment analysis · Journey mapping · Predictive recommendations · Campaign generation</p>
+    <p style="margin:0.8rem 0 0; font-size:0.75rem; color:#6b6b80; font-family:'JetBrains Mono',monospace; letter-spacing:0.08em;">BUILT BY <span style="color:#a09fff;">RISHIKANTH MANNAVA</span></p>
 </div>
 """, unsafe_allow_html=True)
 
